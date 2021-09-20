@@ -56,21 +56,7 @@ invokeFunctions() {
         -C mychannel -n qscc \
         -c '{"function":"GetTransactionByID","Args":["mychannel", "eb00ec055803ca538fc32637e622caa62687c30e07c84d7002ad4e73a13e71b1"]}'
 
-    # peer chaincode invoke \
-    #     -o localhost:7050 \
-    #     --cafile $ORDERER_CA \
-    #     --tls $CORE_PEER_TLS_ENABLED \
-    #     --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_ORG1_CA \
-    #     -C mychannel -n qscc \
-    #     -c '{"function":"GetChainInfo","Args":["mychannel"]}'
 
-    # peer chaincode invoke \
-    #     -o localhost:7050 \
-    #     --cafile $ORDERER_CA \
-    #     --tls $CORE_PEER_TLS_ENABLED \
-    #     --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_ORG1_CA \
-    #     -C mychannel -n qscc \
-    #     -c '{"function":"GetBlockByNumber","Args":["mychannel","2"]}'
 
 }
 invokeFunctions

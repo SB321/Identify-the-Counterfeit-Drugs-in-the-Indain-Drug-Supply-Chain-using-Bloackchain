@@ -106,13 +106,6 @@ approveForMyOrg1(){
     
 }
 
-# --signature-policy "OR ('Org1MSP.member')"
-# --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_ORG1_CA --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG2_CA
-# --peerAddresses peer0.org1.example.com:7051 --tlsRootCertFiles $PEER0_ORG1_CA --peerAddresses peer0.org2.example.com:9051 --tlsRootCertFiles $PEER0_ORG2_CA
-#--channel-config-policy Channel/Application/Admins
-# --signature-policy "OR ('Org1MSP.peer','Org2MSP.peer')"
-
-
 checkCommitReadyness(){
     setGlobalsForPeer0Org1
 
@@ -179,43 +172,6 @@ chaincodeInvokeInit(){
     --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG2_CA \
     --isInit -c '{"function":"initLedger","Args":[]}'
     
-}
-
-
-chaincodeInvoke(){
-    # setGlobalsForPeer0Org1
-
-    # Initialize Ledger
-    # peer chaincode invoke -o localhost:7050 \
-    # --ordererTLSHostnameOverride orderer.example.com \
-    # --tls $CORE_PEER_TLS_ENABLED --cafile $ORDERER_CA -C $CHANNEL_NAME -n ${CC_NAME} \
-    # --peerAddresses localhost:7051 --tlsRootCertFiles $PEER0_ORG1_CA \
-    # --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG2_CA  \
-    # -c '{"function":"initLedger","Args":[]}'
-    
-    setGlobalsForPeer0Org1
-
-    ## Create Car
-    # peer chaincode invoke -o localhost:7050 \
-    #     --ordererTLSHostnameOverride orderer.example.com \
-    #     --tls $CORE_PEER_TLS_ENABLED \
-    #     --cafile $ORDERER_CA \
-    #     -C $CHANNEL_NAME -n ${CC_NAME}  \
-    #     --peerAddresses localhost:7051 \
-    #     --tlsRootCertFiles $PEER0_ORG1_CA \
-    #     --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG2_CA $PEER_CONN_PARMS  \
-    #     -c '{"function": "CreateCar","Args":["Car-ABCDEEE", "Audi", "R8", "Red", "Pavan"]}'
-    
-    ## Change car owner
-    peer chaincode invoke -o localhost:7050 \
-        --ordererTLSHostnameOverride orderer.example.com \
-        --tls $CORE_PEER_TLS_ENABLED \
-        --cafile $ORDERER_CA \
-        -C $CHANNEL_NAME -n ${CC_NAME}  \
-        --peerAddresses localhost:7051 \
-        --tlsRootCertFiles $PEER0_ORG1_CA \
-        --peerAddresses localhost:9051 --tlsRootCertFiles $PEER0_ORG2_CA $PEER_CONN_PARMS  \
-        -c '{"function": "ChangeCarOwner","Args":["Car-ABCDEEE", "Sandip"]}'
 }
 
 chaincodeQuery(){

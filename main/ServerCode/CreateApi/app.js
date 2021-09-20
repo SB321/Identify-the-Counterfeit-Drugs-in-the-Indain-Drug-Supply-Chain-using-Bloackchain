@@ -38,7 +38,6 @@ app.use(bearerToken());
 
 logger.level = 'debug';
 
-// Government ID - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MjUxNzgzNjMsInVzZXJuYW1lIjoiZ292ZXJubWVudDEiLCJvcmdOYW1lIjoiT3JnMiIsImlhdCI6MTYyMTU3ODM2M30.-GUucBzvFtvDUsyG5bQvxI8wYoKoFuCBYnUrC1-fx-U
 
 app.use((req, res, next) => {
     logger.debug('New req for %s', req.originalUrl);
@@ -183,7 +182,7 @@ app.post('/insert/medicine', async function (req, res) {
     try {
         logger.debug('==================== INVOKE ON CHAINCODE ==================');
         var peers = req.body.peers;
-        var chaincodeName = 'fabcar';
+        var chaincodeName = 'medicineChaincode';
         var channelName = 'mychannel';
         var fcn = "createMedicine";
         var args = req.body.args;
@@ -235,7 +234,7 @@ app.post('/update/current/state',async function(req,res){
 	try {
         logger.debug('==================== INVOKE ON CHAINCODE ==================');
         var peers = req.body.peers;
-        var chaincodeName = 'fabcar';
+        var chaincodeName = 'medicineChaincode';
         var channelName = 'mychannel';
         var fcn = "updateCurrentState"; 
         var args = req.body.args;
@@ -289,7 +288,7 @@ app.post('/update/current/owner',async function(req,res){
 	try {
         logger.debug('==================== INVOKE ON CHAINCODE ==================');
         var peers = req.body.peers;
-        var chaincodeName = 'fabcar';
+        var chaincodeName = 'medicineChaincode';
         var channelName = 'mychannel';
         var fcn = "updateCurrentOwner"; 
         var args = req.body.args;
@@ -364,7 +363,7 @@ app.get('/read/medicine', async function (req, res) {
         args = JSON.parse(args);
         logger.debug(args);
 
-        let message = await query.query('mychannel', 'fabcar', args, fcn, 'government1','Org2');
+        let message = await query.query('mychannel', 'medicineChaincode', args, fcn, 'government1','Org2');
 
         const response_payload = {
             result: message,
@@ -411,7 +410,7 @@ app.get('/read/history/medicine', async function (req, res) {
         args = JSON.parse(args);
         logger.debug(args);
 
-        let message = await query.query('mychannel', 'fabcar', args, fcn, 'government1','Org2');
+        let message = await query.query('mychannel', 'medicineChaincode', args, fcn, 'government1','Org2');
 
         const response_payload = {
             result: message,
